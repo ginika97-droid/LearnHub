@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LearnHub — Northstar</title>
+<style>
+:root{--bg:#fafaf8;--card:#fff;--text:#171717;--muted:#737373;--line:#e7e5e4;--navy:#1e293b;--sage:#a7b8a1;--soft:#f3f3ef;--shadow:0 8px 30px rgba(23,23,23,.045)}
+[data-theme=dark]{--bg:#111315;--card:#181a1d;--text:#f4f3ef;--muted:#a6a6a3;--line:#303236;--navy:#dbe3ed;--soft:#202327;--shadow:0 12px 35px rgba(0,0,0,.22)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}
+.app{display:flex;min-height:100vh}.side{width:252px;position:fixed;inset:0 auto 0 0;border-right:1px solid var(--line);background:var(--bg);padding:24px 16px 24px;z-index:10;transition:.25s;overflow-y:auto;overflow-x:hidden}.side.hide{transform:translateX(-100%)}
+.brand{display:flex;gap:11px;align-items:center;padding:0 10px 25px}.mark{width:31px;height:31px;border-radius:9px;background:var(--navy);color:var(--bg);display:grid;place-items:center;font:20px Georgia,serif}.brand b{font-size:16px;letter-spacing:-.02em}.brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:.15em;margin-top:2px}
+.workspace{margin:0 7px 20px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;color:var(--muted);font-size:12px}.group{margin:19px 0}.label{padding:0 10px 7px;color:#999;font-size:9px;letter-spacing:.16em;font-weight:700}.nav{width:100%;border:0;background:none;color:var(--muted);display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;text-align:left}.nav:hover,.nav.active{background:var(--soft);color:var(--text)}.nav.active{font-weight:650}.nav .count{margin-left:auto;font-size:10px;background:var(--sage);color:#273126;padding:2px 6px;border-radius:99px}.collapse{position:sticky;bottom:auto;left:auto;right:auto;width:100%;margin-top:18px;border:1px solid var(--line);background:var(--card);color:var(--muted);padding:10px 12px;text-align:left;border-radius:9px;box-shadow:var(--shadow)}
+.main{margin-left:252px;min-width:0;flex:1}.top{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);z-index:5}.search{width:min(430px,48vw);display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:var(--card);padding:9px 12px;border-radius:10px;color:var(--muted)}.search input{border:0;outline:0;background:none;color:var(--text);width:100%}.actions{display:flex;align-items:center;gap:9px}.iconbtn,.avatar{width:36px;height:36px;border:1px solid var(--line);background:var(--card);border-radius:10px;display:grid;place-items:center;color:var(--muted)}.avatar{border-radius:50%;background:var(--navy);color:var(--bg);font-size:11px;font-weight:700}.mobile{display:none}
+.content{max-width:1280px;margin:auto;padding:45px 44px 70px}.head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:10px}.eyebrow{font-size:9px;letter-spacing:.17em;color:var(--muted);font-weight:750;margin-bottom:9px}.head h1{font:46px/1.02 Georgia,"Times New Roman",serif;letter-spacing:-.035em;margin:0}.lede{color:var(--muted);font-size:15px;margin:0 0 30px}.btn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:9px;padding:10px 14px}.primary{border:1px solid var(--navy);background:var(--navy);color:var(--bg);border-radius:9px;padding:11px 16px;font-weight:650}.card{border:1px solid var(--line);background:var(--card);border-radius:16px;box-shadow:var(--shadow)}
+.dashboard{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}.feature{grid-column:span 8;min-height:390px;border-radius:18px;overflow:hidden;background:var(--navy);color:var(--bg);display:grid;grid-template-columns:1fr .82fr}.featurecopy{padding:34px;display:flex;flex-direction:column;justify-content:center}.feature h2{font:58px/.92 Georgia,serif;letter-spacing:-.055em;margin:4px 0 20px}.feature h2 em{color:#c9d7c5;font-style:italic}.feature p{max-width:470px;color:#c9ced4;line-height:1.65}.feature .stats{display:flex;gap:18px;color:#c9ced4;font-size:12px;margin:10px 0 24px}.visual{position:relative;overflow:hidden;background:linear-gradient(145deg,#253246,#17202c)}.visual:before,.visual:after{content:"";position:absolute;border-radius:50%;filter:blur(1px)}.visual:before{width:300px;height:300px;right:-55px;top:30px;background:radial-gradient(circle at 35% 35%,#a7b8a1,transparent 64%);opacity:.72}.visual:after{width:210px;height:210px;left:30px;bottom:-55px;background:radial-gradient(circle,#778b78,transparent 65%);opacity:.45}.quote{position:absolute;left:28px;right:28px;bottom:30px;font:22px/1.2 Georgia,serif;color:#e9eee8;z-index:1}.metric{grid-column:span 4;padding:24px;min-height:187px}.metric:nth-of-type(3),.metric:nth-of-type(4){grid-column:span 4}.metriclabel{font-size:9px;letter-spacing:.15em;color:var(--muted);font-weight:750}.metricvalue{font:45px Georgia,serif;margin-top:20px}.metricvalue span{font:15px Inter,sans-serif;color:var(--muted)}.change{color:#647563;font-size:12px;margin-top:5px}.spark{height:45px;display:flex;gap:7px;align-items:end;margin-top:16px}.spark i{display:block;width:12px;background:var(--sage);border-radius:5px 5px 2px 2px}.streaks{display:flex;gap:4px;margin-top:22px}.streaks i{width:19px;height:19px;border-radius:6px;background:var(--soft);display:grid;place-items:center;color:var(--sage);font-style:normal}.ring{width:78px;height:78px;border:8px solid var(--soft);border-top-color:var(--sage);border-right-color:var(--sage);border-radius:50%;display:grid;place-items:center;margin-top:12px}.ring strong{font-size:15px}.ring small{display:block;color:var(--muted);font-size:8px}.skills{grid-column:span 7;padding:24px}.next{grid-column:span 5;padding:24px}.cardhead{display:flex;justify-content:space-between;align-items:start;margin-bottom:20px}.card h3{font:23px Georgia,serif;margin:0}.cardhead button,.next button{border:0;background:none;color:var(--muted)}.skill{margin:18px 0}.skill div{display:flex;justify-content:space-between;margin-bottom:7px}.skill b{font-size:11px}.bar{height:5px;border-radius:9px;background:var(--soft);overflow:hidden}.bar span{height:100%;display:block;background:var(--sage);border-radius:inherit}.next h3{font-size:28px;margin:8px 0}.next p{color:var(--muted);margin-bottom:25px}
+.catalogbar{display:flex;gap:10px;margin:25px 0}.catalogbar .search{background:var(--card);width:100%}.section{display:flex;justify-content:space-between;align-items:end;margin:34px 0 15px}.section h2{font:30px Georgia,serif;margin:0}.section span{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.course{overflow:hidden;cursor:pointer;transition:.2s}.course:hover{transform:translateY(-2px)}.art{height:155px;background:linear-gradient(135deg,#e8ebe5,#cfd9cf);position:relative;overflow:hidden}.art:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-40px;top:-50px;background:radial-gradient(circle,#1e293b,transparent 67%);opacity:.85}.art:nth-child(odd){background:linear-gradient(135deg,#e9e7e0,#d8d4ca)}.arttag{position:absolute;left:16px;top:15px;background:rgba(255,255,255,.7);padding:6px 8px;border-radius:99px;font-size:9px;z-index:2}.artletter{position:absolute;right:35px;bottom:-22px;font:145px Georgia,serif;color:#fff;opacity:.55;z-index:2}.coursebody{padding:20px}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}.course h3{font:25px Georgia,serif;margin:10px 0 7px}.course p{color:var(--muted);line-height:1.55;margin:0 0 16px}.details{display:flex;gap:12px;color:var(--muted);font-size:10px}.details span{display:flex;align-items:center;gap:4px}.courseprog{margin-top:15px}.courseprog div{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:6px}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px;margin-top:25px}.heroMain{padding:34px}.heroMain h2{font:54px/.95 Georgia,serif;letter-spacing:-.04em;margin:5px 0 18px}.heroMain p{max-width:700px;color:var(--muted);font-size:15px;line-height:1.7}.heroVisual{min-height:330px;border-radius:16px;background:linear-gradient(145deg,#1e293b,#344152);position:relative;overflow:hidden;color:#fff;padding:25px;display:flex;align-items:end}.heroVisual .letter{font:190px Georgia,serif;position:absolute;right:0;bottom:-42px;opacity:.15}.heroVisual .status{position:relative;z-index:2;width:100%}.cols{display:grid;grid-template-columns:1.4fr .6fr;gap:18px;margin-top:18px}.curriculum,.objectives{padding:26px}.lessonrow{width:100%;display:flex;align-items:center;gap:13px;padding:15px 0;border:0;border-top:1px solid var(--line);background:none;text-align:left;color:var(--text)}.lessonrow:first-of-type{margin-top:15px}.lessonrow .num{width:27px;height:27px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:10px}.lessonrow small{display:block;color:var(--muted);margin-top:4px}.lessonrow svg{margin-left:auto}.clean{padding-left:19px;color:var(--muted);line-height:2}
+.lessonlayout{display:grid;grid-template-columns:250px 1fr;gap:18px}.lessonnav{padding:12px;height:max-content}.lessonnav button{width:100%;border:0;background:none;color:var(--muted);padding:11px 9px;text-align:left;border-radius:8px;display:flex;gap:9px}.lessonnav button.active{background:var(--soft);color:var(--text)}.lessonarticle{padding:30px}.lessonprogress{display:flex;gap:15px;align-items:center;color:var(--muted);font-size:11px}.lessonprogress .bar{flex:1}.lessonarticle h2{font:43px Georgia,serif;max-width:800px;margin:30px 0 15px}.lessonbody{font-size:16px;line-height:1.8;max-width:800px;color:var(--muted)}.video{height:270px;border-radius:14px;background:linear-gradient(145deg,#182333,#344054);display:grid;place-items:center;margin:25px 0}.callout{border-left:3px solid var(--sage);background:var(--soft);padding:17px 20px;margin-top:22px}.lessonactions{display:flex;justify-content:space-between;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.quiz{max-width:800px;margin:25px auto;padding:30px}.choice{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--text);padding:16px;border-radius:10px;margin:9px 0}.choice.selected{border-color:var(--navy);background:var(--soft)}.feedback{padding:15px;background:rgba(167,184,161,.15);border-radius:10px;margin-top:15px}
+.paths,.badges,.certs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.path,.badge,.cert{padding:24px}.path .num{font:30px Georgia,serif;color:var(--muted)}.path h2{font:29px Georgia,serif;margin:35px 0 8px}.path p,.path small,.badge span,.cert small{color:var(--muted)}.path .foot{margin:18px 0}.badge{display:flex;gap:16px;align-items:center}.badgeicon{width:55px;height:55px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font:20px Georgia,serif;background:var(--soft)}.badge b,.badge span{display:block}.badge span{font-size:12px;margin-top:4px}.certpaper{min-height:230px;padding:28px;text-align:center;background:linear-gradient(145deg,#faf8f0,#e8e5d9);color:#252525;border-radius:12px}.certbrand{font-size:10px;letter-spacing:.2em}.certpaper h3{font:28px Georgia,serif;margin:42px 0 8px}.seal{width:42px;height:42px;border:1px solid #777;border-radius:50%;display:grid;place-items:center;margin:16px auto;font-family:Georgia,serif}.certinfo{padding-top:15px;display:grid;gap:6px}.certinfo span{color:var(--muted);font-size:12px}.certinfo button{justify-self:start;margin-top:8px}
+.leader{overflow:hidden}.leaderrow,.leaderhead{display:grid;grid-template-columns:70px 1.8fr 1fr 1fr 1fr;gap:15px;align-items:center;padding:17px 22px}.leaderhead{font-size:9px;letter-spacing:.14em;color:var(--muted);border-bottom:1px solid var(--line)}.leaderrow{border-bottom:1px solid var(--line)}.leaderrow.you{background:var(--soft)}.person{display:flex;align-items:center;gap:10px}.tiny{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--bg);font-size:9px}.person em{font-style:normal;color:var(--sage);font-size:10px;margin-left:5px}
+.notifications{overflow:hidden}.notification{width:100%;border:0;border-bottom:1px solid var(--line);background:none;color:var(--text);padding:20px 24px;text-align:left;display:flex;gap:15px}.notification b,.notification span{display:block}.notification span{color:var(--muted);font-size:11px;margin-top:5px}.noticeIcon{width:36px;height:36px;border-radius:10px;background:var(--soft);display:grid;place-items:center;color:var(--sage)}.empty{text-align:center;padding:80px 20px}.empty h3{font:30px Georgia,serif}.empty p{color:var(--muted)}
+.profile{display:grid;grid-template-columns:.7fr 1.3fr;gap:18px}.profilecard,.history{padding:28px}.profilepic{width:88px;height:88px;border-radius:50%;background:var(--navy);color:var(--bg);display:grid;place-items:center;font-size:25px;font-weight:700}.profile h2{font:34px Georgia,serif;margin:20px 0 5px}.profile p,.profilecard>span{color:var(--muted)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);overflow:hidden}.stat{background:var(--card);padding:25px}.stat span,.stat b{display:block}.stat span{color:var(--muted);font-size:11px}.stat b{font:30px Georgia,serif;margin-top:10px}.history{grid-column:1/-1}.historyrow{display:flex;align-items:center;gap:12px;padding:14px 0;border-top:1px solid var(--line)}.historyrow small{margin-left:auto;color:var(--muted)}
+.calendar{padding:24px}.calhead{display:flex;justify-content:space-between;align-items:center}.calgrid{display:grid;grid-template-columns:repeat(7,1fr);margin-top:20px}.calgrid>*{min-height:60px;padding:10px;border-top:1px solid var(--line);border-right:1px solid var(--line);color:var(--muted)}.calgrid b{min-height:auto;border:0;font-size:9px;letter-spacing:.1em}.calgrid .today{background:var(--soft);color:var(--text);font-weight:700}.calgrid i{display:block;width:5px;height:5px;background:var(--sage);border-radius:50%;margin-top:8px}.muted{opacity:.25}
+.overlay{position:fixed;inset:0;background:#0008;display:grid;place-items:center;padding:20px;z-index:20}.panelgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.wide{grid-column:1/-1}.listcard{padding:24px}.listitem{display:flex;align-items:center;gap:14px;padding:15px 0;border-top:1px solid var(--line)}.listitem:first-child{border-top:0}.listitem>span:last-child{margin-left:auto;color:var(--muted)}.tag{display:inline-block;padding:5px 8px;border-radius:99px;background:var(--soft);color:var(--muted);font-size:10px}.toggle{width:44px;height:24px;border:0;border-radius:99px;background:var(--line);padding:3px;transition:background .25s ease}.toggle i{display:block;width:18px;height:18px;background:var(--card);border-radius:50%;transition:transform .28s cubic-bezier(.4,0,.2,1),background .25s ease;box-shadow:0 1px 3px rgba(0,0,0,.2)}.toggle.on{background:var(--sage)}.toggle.on i{transform:translateX(20px)}.modal{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;width:min(650px,100%);position:relative}.close{position:absolute;right:15px;top:15px;border:0;background:none;color:var(--muted)}.modal h2{font:38px Georgia,serif}.full{width:100%;margin-top:18px}
+@media(max-width:1000px){.side{width:220px}.main{margin-left:220px}.grid,.paths,.badges,.certs{grid-template-columns:repeat(2,1fr)}.feature{grid-column:1/-1}.metric{grid-column:span 4}.hero,.cols,.profile{grid-template-columns:1fr}.lessonlayout{grid-template-columns:1fr}}
+@media(max-width:700px){.side{transform:translateX(-100%);width:260px}.side.show{transform:translateX(0)}.main{margin-left:0}.mobile{display:grid}.top{padding:0 15px;gap:10px}.search{width:100%;max-width:none}.top .search kbd{display:none}.content{padding:30px 16px 50px}.head{align-items:start;flex-direction:column}.head h1{font-size:39px}.dashboard,.grid,.paths,.badges,.certs{grid-template-columns:1fr}.feature{grid-template-columns:1fr;min-height:auto}.visual{min-height:220px}.metric,.skills,.next{grid-column:1}.heroMain h2{font-size:43px}.leaderhead{display:none}.leaderrow{grid-template-columns:40px 1fr 55px 55px}.leaderrow span:nth-last-child(2){display:none}.lessonlayout{grid-template-columns:1fr}.lessonnav{display:flex;overflow:auto}.lessonnav button{min-width:210px}.lessonarticle h2{font-size:35px}.catalogbar{flex-direction:column}}
+@media(max-width:760px){.panelgrid{grid-template-columns:1fr}.wide{grid-column:auto}}
+.reduce-motion,.reduce-motion *{transition:none!important;animation:none!important;scroll-behavior:auto!important} </style>
+</head>
+<body>
+<div id="app">
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <div class="mark">N</div>
+      <div><b>LearnHub</b><small>NORTHSTAR</small></div>
+    </div>
+    <div class="workspace">Northstar Learning</div>
+    <div class="group"><div class="label">LEARN</div>
+      <button class="nav active"><span>⌂</span>Home</button>
+      <button class="nav"><span>◈</span>Explore Courses</button>
+      <button class="nav"><span>▤</span>My Learning</button>
+      <button class="nav"><span>⌁</span>Learning Paths</button>
+      <button class="nav"><span>✓</span>Assessments</button>
+    </div>
+    <div class="group"><div class="label">DEVELOPMENT</div>
+      <button class="nav"><span>◎</span>Skills</button>
+      <button class="nav"><span>◎</span>Goals</button>
+      <button class="nav"><span>♜</span>Achievements</button>
+      <button class="nav"><span>◇</span>Certificates</button>
+    </div>
+    <div class="group"><div class="label">COMMUNITY</div>
+      <button class="nav"><span>♙</span>Leaderboard</button>
+      <button class="nav"><span>♙</span>Learning Groups</button>
+      <button class="nav"><span>▱</span>Discussions</button>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div class="search"><span>⌕</span><span style="color:var(--muted)">Search courses, skills, people…</span></div>
+      <div class="actions"><div class="iconbtn">◐</div><div class="iconbtn">♧</div><div class="avatar">SC</div></div>
+    </header>
+    <div class="content">
+      <div class="head"><div><div class="eyebrow">PERSONAL LEARNING</div><h1>Good evening, Sarah.</h1></div><button class="btn">Explore catalogue ↗</button></div>
+      <p class="lede">Here’s what you’ve been learning this week.</p>
+      <section class="dashboard">
+        <div class="feature">
+          <div class="featurecopy">
+            <div class="eyebrow">CONTINUE LEARNING</div>
+            <h2>Strategic<br><em>Thinking.</em></h2>
+            <p>Turn complexity into clarity. Build the habits that help you frame problems, prioritise decisions and communicate strategy.</p>
+            <div class="stats"><span><b>68%</b> complete</span><span>◷ 4h 20m</span><span>Intermediate</span></div>
+            <button class="primary">▶ Continue course</button>
+          </div>
+          <div class="visual"><div class="quote">“The quality of a decision is shaped by the quality of the question.”</div></div>
+        </div>
+        <div class="metric card"><div class="metriclabel">LEARNING THIS MONTH</div><div class="metricvalue">12.5<span> hrs</span></div><div class="change">↗ 18% · vs last month</div><div class="spark"><i style="height:32%"></i><i style="height:47%"></i><i style="height:39%"></i><i style="height:61%"></i><i style="height:54%"></i><i style="height:72%"></i><i style="height:88%"></i></div></div>
+        <div class="metric card"><div class="metriclabel">CURRENT STREAK</div><div class="metricvalue">14<span> days</span></div><div class="streaks">♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨</div><small>Keep it going — you’re building a habit.</small></div>
+        <div class="metric card"><div class="metriclabel">COURSES COMPLETED</div><div class="metricvalue">18</div><div class="ring"><strong>72%</strong></div><small>annual goal</small></div>
+        <div class="skills card"><div class="cardhead"><div><div class="eyebrow">DEVELOPMENT</div><h3>Skills developing</h3></div><button>View all ›</button></div>
+          <div class="skill"><div><span>Strategic Thinking</span><b>78%</b></div><div class="bar"><span style="width:78%"></span></div></div>
+          <div class="skill"><div><span>Leadership</span><b>64%</b></div><div class="bar"><span style="width:64%"></span></div></div>
+          <div class="skill"><div><span>Communication</span><b>91%</b></div><div class="bar"><span style="width:91%"></span></div></div>
+          <div class="skill"><div><span>Data Literacy</span><b>52%</b></div><div class="bar"><span style="width:52%"></span></div></div>
+        </div>
+        <div class="next card"><div class="eyebrow">UP NEXT</div><h3>Communication &amp; Influence</h3><p>2h 45m · Intermediate</p><button class="btn">View course ›</button></div>
+      </section>
+    </div>
+  </main>
+</div>
+</div>
+<script>const courses=[
+{id:1,title:'Strategic Thinking',cat:'Leadership',instructor:'Maya Chen',duration:'4h 20m',difficulty:'Intermediate',rating:'4.9',progress:68,lessons:12,desc:'Turn complexity into clarity. Build the habits that help you frame problems, prioritise decisions and communicate strategy.'},
+{id:2,title:'Leadership Essentials',cat:'Leadership',instructor:'Daniel Brooks',duration:'3h 10m',difficulty:'Beginner',rating:'4.8',progress:100,lessons:9,desc:'A practical foundation for leading with clarity, trust and accountability.'},
+{id:3,title:'Project Management Fundamentals',cat:'Project Management',instructor:'Priya Shah',duration:'5h 05m',difficulty:'Beginner',rating:'4.7',progress:34,lessons:15,desc:'Plan, sequence and deliver work with confidence across modern teams.'},
+{id:4,title:'Communication & Influence',cat:'Communication',instructor:'Elena Rossi',duration:'2h 45m',difficulty:'Intermediate',rating:'4.9',progress:0,lessons:8,desc:'Communicate with precision and influence decisions without adding noise.'},
+{id:5,title:'Data Literacy',cat:'Data & Technology',instructor:'Marcus Reed',duration:'3h 40m',difficulty:'Beginner',rating:'4.8',progress:52,lessons:11,desc:'Understand data, ask better questions and make evidence-led decisions.'},
+{id:6,title:'Introduction to AI',cat:'Data & Technology',instructor:'Noah Williams',duration:'2h 15m',difficulty:'Beginner',rating:'4.9',progress:0,lessons:7,desc:'A practical, non-technical introduction to AI and its place in modern work.'},
+{id:7,title:'Cybersecurity Awareness',cat:'Risk & Compliance',instructor:'Amelia Hart',duration:'1h 25m',difficulty:'Beginner',rating:'4.9',progress:0,lessons:6,desc:'Build safer digital habits and recognise the signals behind common threats.'},
+{id:8,title:'Managing High-Performing Teams',cat:'People Management',instructor:'Owen Patel',duration:'3h 55m',difficulty:'Advanced',rating:'4.8',progress:12,lessons:10,desc:'Create the conditions for ambitious teams to perform sustainably.'},
+{id:9,title:'Executive Presence',cat:'Leadership',instructor:'Sofia Martin',duration:'2h 50m',difficulty:'Advanced',rating:'4.9',progress:0,lessons:8,desc:'Develop a calm, credible presence in high-stakes moments.'},
+{id:10,title:'Commercial Awareness',cat:'Commercial',instructor:'James Okafor',duration:'3h 30m',difficulty:'Intermediate',rating:'4.7',progress:0,lessons:10,desc:'Connect customers, markets and business models to better decisions.'}
+];
+const nav=[['LEARN',[['Home','⌂'],['Explore Courses','◈'],['My Learning','▤'],['Learning Paths','⌁'],['Assessments','✓']]],['DEVELOPMENT',[['Skills','◎'],['Goals','◎'],['Achievements','♜'],['Certificates','◇']]],['COMMUNITY',[['Leaderboard','♙'],['Learning Groups','♙'],['Discussions','▱']]],['PERSONAL',[['Calendar','□'],['Notifications','♧'],['Profile','○'],['Settings','⚙']]]];
+const S={page:"Home",dark:false,search:"",course:courses[0],lesson:0,quiz:0,answers:[],dismissedNotes:[],modal:null,thread:null,userCertificates:[],sidebar:false,settings:{reduceMotion:false,weeklyReminder:true,courseRecommendations:true}};
+const icon=x=>`<span>${x}</span>`;
+const bar=n=>`<div class="bar"><span style="width:${n}%"></span></div>`;
+const head=(e,t,r='')=>`<div class="head"><div><div class="eyebrow">${e}</div><h1>${t}</h1></div>${r}</div>`;
+function go(p){S.page=p;render();window.scrollTo(0,0)}
+function openCourse(id){S.course=courses.find(c=>c.id===id)||courses[0];go('Course')}
+function toast(msg){const x=document.createElement('div');x.className='toast-standalone';x.textContent=msg;document.body.appendChild(x);setTimeout(()=>x.remove(),1800)}
+function courseCard(c){return `<article class="course card" data-course="${c.id}"><div class="art"><span class="arttag">${c.cat}</span><span class="artletter">${c.id%2?'S':'N'}</span></div><div class="coursebody"><div class="meta"><span>${c.difficulty}</span><span>♡</span></div><h3>${c.title}</h3><p>${c.desc}</p><div class="details"><span>${c.instructor}</span><span>◷ ${c.duration}</span><span>☆ ${c.rating}</span></div>${c.progress?`<div class="courseprog"><div><span>${c.progress}% complete</span><span>${Math.max(1,Math.round(c.lessons*c.progress/100))}/${c.lessons}</span></div>${bar(c.progress)}</div>`:''}</div></article>`}
+function dashboard(){return `${head('PERSONAL LEARNING','Good evening, Sarah.','<button class="btn" data-page="Explore Courses">Explore catalogue ↗</button>')}<p class="lede">Here’s what you’ve been learning this week.</p><section class="dashboard"><div class="feature"><div class="featurecopy"><div class="eyebrow">CONTINUE LEARNING</div><h2>Strategic<br><em>Thinking.</em></h2><p>Turn complexity into clarity. Build the habits that help you frame problems, prioritise decisions and communicate strategy.</p><div class="stats"><span><b>68%</b> complete</span><span>◷ 4h 20m</span><span>Intermediate</span></div><button class="primary" data-course="1">▶ Continue course</button></div><div class="visual"><div class="quote">“The quality of a decision is shaped by the quality of the question.”</div></div></div><div class="metric card"><div class="metriclabel">LEARNING THIS MONTH</div><div class="metricvalue">12.5<span> hrs</span></div><div class="change">↗ 18% · vs last month</div><div class="spark">${[32,47,39,61,54,72,88].map(x=>`<i style="height:${x}%"></i>`).join('')}</div></div><div class="metric card"><div class="metriclabel">CURRENT STREAK</div><div class="metricvalue">14<span> days</span></div><div class="streaks">♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨ ♨</div><small>Keep it going — you’re building a habit.</small></div><div class="metric card"><div class="metriclabel">COURSES COMPLETED</div><div class="metricvalue">18</div><div class="ring"><strong>72%</strong></div><small>annual goal</small></div><div class="skills card"><div class="cardhead"><div><div class="eyebrow">DEVELOPMENT</div><h3>Skills developing</h3></div><button data-page="Skills">View all ›</button></div>${[['Strategic Thinking',78],['Leadership',64],['Communication',91],['Data Literacy',52]].map(x=>`<div class="skill"><div><span>${x[0]}</span><b>${x[1]}%</b></div>${bar(x[1])}</div>`).join('')}</div><div class="next card"><div class="eyebrow">UP NEXT</div><h3>Communication &amp; Influence</h3><p>2h 45m · Intermediate</p><button class="btn" data-course="4">View course ›</button></div></section>`}
+function explore(){const q=S.search.toLowerCase();const list=courses.filter(c=>(c.title+' '+c.cat+' '+c.instructor).toLowerCase().includes(q));const recSection=S.settings.courseRecommendations?`<div class="section"><div><div class="eyebrow">FOR YOU</div><h2>Recommended learning</h2></div><span>${list.length} courses</span></div>`:`<div class="section"><div><div class="eyebrow">CATALOGUE</div><h2>All courses</h2></div><span>${list.length} courses</span></div>`;return `${head('COURSE CATALOGUE','Explore courses')}<div class="catalogbar"><div class="search"><span>⌕</span><input id="catalogSearch" value="${S.search.replace(/"/g,'&quot;')}" placeholder="Search the catalogue…"></div><button class="btn" data-toast="Use the search field to filter courses.">Filters</button></div>${recSection}<div class="grid">${list.map(courseCard).join('')}</div>`}
+function coursePage(){const c=S.course;const lessons=['The strategic lens','From information to insight','Framing the problem','Prioritisation under pressure','Making the call','Communicating the strategy'];return `${head(c.cat,c.title,'<button class="btn" data-page="Explore Courses">Back to catalogue</button>')}<div class="hero"><div class="heroMain card"><div class="eyebrow">${c.cat} · ${c.difficulty}</div><h2>${c.title}</h2><p>${c.desc}</p><div class="details"><span>${c.instructor}</span><span>◷ ${c.duration}</span><span>☆ ${c.rating}</span><span>${c.lessons} lessons</span></div><br><button class="primary" data-page="Lesson">▶ ${c.progress?'Continue course':'Start course'}</button></div><div class="heroVisual"><div class="letter">${c.id%2?'S':'N'}</div><div class="status"><div class="eyebrow">YOUR PROGRESS</div><strong>${c.progress}% complete</strong>${bar(c.progress)}</div></div></div><div class="cols"><section class="curriculum card"><div class="eyebrow">CURRICULUM</div><h3>Course lessons</h3>${lessons.map((x,i)=>`<button class="lessonrow" data-page="Lesson"><span class="num">${i<3?'✓':i+1}</span><span><b>${x}</b><small>${i<3?'Completed':'Available'} · ${35+i*7} min</small></span>›</button>`).join('')}</section><aside class="objectives card"><div class="eyebrow">LEARNING OBJECTIVES</div><h3>By the end, you’ll be able to</h3><ul class="clean"><li>Frame ambiguous problems with clarity.</li><li>Prioritise decisions using evidence.</li><li>Communicate a strategic recommendation.</li><li>Recognise common decision traps.</li></ul></aside></div>`}
+function lesson(){const names=['The strategic lens','From information to insight','Framing the problem','Prioritisation under pressure','Making the call','Communicating the strategy'];return `${head('STRATEGIC THINKING',names[S.lesson],'<button class="btn" data-page="Course">Exit lesson</button>')}<div class="lessonlayout"><aside class="lessonnav card">${names.map((n,i)=>`<button class="${i===S.lesson?'active':''}" data-lesson="${i}"><span>${i<2?'✓':i+1}</span>${n}</button>`).join('')}</aside><article class="lessonarticle card"><div class="lessonprogress"><span>Lesson ${S.lesson+1} of ${names.length}</span>${bar((S.lesson+1)/names.length*100)}</div><div class="lessonbody"><div class="eyebrow">TEXT LESSON · 12 MIN</div><h2>Good strategy starts with a better question.</h2><p>When a team is moving quickly, it is tempting to jump straight to solutions. Strategic thinking asks you to pause long enough to understand what the decision is really about.</p><div class="video"><button class="primary" data-toast="Video preview started.">▶ Play 04:32</button></div><p>A useful strategic question changes the shape of the conversation. Instead of asking “What should we do?”, ask “What outcome are we trying to create, and what constraint matters most?”</p><div class="callout"><b>Try this</b><p>Write the decision in one sentence without naming a solution. If you can’t, the problem may still be too fuzzy.</p></div></div><div class="lessonactions"><button class="btn" data-lesson-prev>Previous</button><button class="primary" data-complete-lesson>Mark as complete ✓</button></div></article></div>`}
+function quiz(){const qs=[['A team is debating several possible initiatives. What is the most strategic first step?',['Choose the initiative with the highest visibility','Clarify the outcome and decision criteria','Ask the most senior person to decide','Start with the easiest initiative'],1],['Which question best helps turn information into insight?',['What happened?','Who is responsible?','So what does this mean for our decision?','Can we collect more data?'],2],['A useful strategic recommendation should primarily be…',['Complex and comprehensive','Easy to defend at all costs','Clear about the choice, rationale and trade-offs','Focused on avoiding disagreement'],2]];const q=qs[S.quiz],a=S.answers[S.quiz];return `${head('ASSESSMENT','Knowledge check','<span>'+`${S.quiz+1} / 3`+'</span>')}<div class="quiz card"><div class="eyebrow">STRATEGIC THINKING</div>${bar((S.quiz+1)/3*100)}<h2>${q[0]}</h2>${q[1].map((x,i)=>`<button class="choice ${a===i?'selected':''}" data-answer="${i}">${String.fromCharCode(65+i)}. ${x}</button>`).join('')}${a!==undefined?`<div class="feedback"><b>${a===q[2]?'Correct — exactly.':'Not quite.'}</b><p>${a===q[2]?'That distinction is at the heart of strategic thinking.':'Take another look at the decision criteria, then try again.'}</p></div>`:''}<div class="lessonactions"><button class="btn" data-quiz-prev>Previous</button><button class="primary" data-quiz-next>${S.quiz===2?'Finish assessment':'Next question'}</button></div></div>`}
+function nextQuiz(){if(S.answers[S.quiz]===undefined){toast('Choose an answer first.');return}if(S.quiz<2){S.quiz++;render()}else{S.modal='quiz';render()}}
+function generic(t,e,c){return head(e,t)+`<div class="panelgrid"><section class="card listcard"><div class="eyebrow">NORTHSTAR LEARNING</div><h3>${c}</h3><p style="color:var(--muted);line-height:1.7">Everything here is connected to your learning record, so actions have a visible outcome.</p></section><section class="card listcard"><div class="eyebrow">RECENT ACTIVITY</div><div class="listitem"><b>Strategic Thinking</b><span>68% complete</span></div><div class="listitem"><b>Leadership Essentials</b><span>Completed</span></div><div class="listitem"><b>Data Literacy</b><span>52% complete</span></div></section></div>`}
+function skills(){return head('DEVELOPMENT','Skills that compound')+`<div class="cols"><section class="card" style="padding:26px"><div class="eyebrow">CURRENT SKILLS</div><h3>Your development profile</h3>${[['Communication',91,'Advanced'],['Strategic Thinking',78,'Advanced'],['Leadership',64,'Intermediate'],['Data Literacy',52,'Intermediate'],['Commercial Awareness',41,'Developing'],['AI Fluency',28,'Developing']].map(x=>`<div class="skill" style="margin:25px 0"><div><span>${x[0]} · ${x[2]}</span><b>${x[1]}%</b></div>${bar(x[1])}</div>`).join('')}</section><aside class="card" style="padding:26px"><div class="eyebrow">RECOMMENDED</div><h3>Skills to build next</h3>${['Executive Presence','AI Fluency','Commercial Awareness'].map(x=>`<div class="lessonrow"><span class="num">↗</span><span><b>${x}</b><small>Recommended for your development</small></span>›</div>`).join('')}</aside></div>`}
+function paths(){return head('DEVELOPMENT PROGRAMMES','Learning paths')+`<div class="paths">${[['Future Leader',12,'34h',72],['Project Management',9,'28h',48],['AI & Digital Fluency',8,'18h',36],['Commercial Excellence',7,'22h',61],['People Management',10,'31h',24]].map((x,i)=>`<article class="path card"><div class="num">0${i+1}</div><div class="eyebrow">LEARNING PATH</div><h2>${x[0]}</h2><p>${x[1]} courses · ${x[2]}</p>${bar(x[3])}<div class="foot"><b>${x[3]}% complete</b><br><small>Foundation → Intermediate → Advanced</small></div><button class="btn" data-course="${[1,3,6,10,8][i]}">View programme ›</button></article>`).join('')}</div>`}
+function achievements(){return head('RECOGNITION','Achievements')+`<div class="badges">${[['First Course Completed','A confident beginning','✓'],['7-Day Learning Streak','Consistency compounds','7'],['Leadership Foundations','Core leadership skills','L'],['Strategic Thinker','Strategic Thinking · 68%','S'],['AI Ready','AI & Digital Fluency','AI'],['100 Learning Hours','A century of growth','100']].map(x=>`<div class="badge card"><div class="badgeicon">${x[2]}</div><div><b>${x[0]}</b><span>${x[1]}</span></div></div>`).join('')}</div>`}
+function certificates(){const built=[["Leadership Essentials","18 June 2026","94%","LH-LE-260618"],["Communication & Influence","04 May 2026","91%","LH-CI-260504"],["Data Literacy","22 March 2026","89%","LH-DL-260322"]],ext=S.userCertificates||[];const cards=built.map(x=>`<div class="cert card"><div class="certpaper"><div class="certbrand">LEARNHUB</div><div class="certsmall">CERTIFICATE OF COMPLETION</div><h3>${x[0]}</h3><div class="seal">N</div><small>Northstar Learning</small></div><div class="certinfo"><b>${x[0]}</b><span>${x[1]} · Score ${x[2]}</span><small>Certificate ID · ${x[3]}</small><button class="btn" data-modal="certificate:${x[0]}:${x[2]}:${x[1]}:${x[3]}">View certificate</button><button class="btn" data-download-cert="${x[0]}|${x[2]}|${x[1]}|${x[3]}|Northstar Learning">Download PDF</button></div></div>`).join("");const external=ext.map(x=>`<div class="cert card"><div class="certpaper"><div class="certbrand">LEARNHUB</div><div class="certsmall">EXTERNAL CERTIFICATE</div><h3>${x.title}</h3><div class="seal">N</div><small>${x.issuer}</small></div><div class="certinfo"><b>${x.title}</b><span>${x.date} · ${x.issuer}</span><small>Certificate ID · ${x.id}</small><button class="btn" data-download-cert="${x.title}|External|${x.date}|${x.id}|${x.issuer}">Download PDF</button></div></div>`).join("");return head("CREDENTIALS","Certificates",'<button class="primary" data-modal="add-certificate">+ Add certificate</button>')+'<p class="lede">Your learning credentials, all in one place.</p><div class="certs">'+cards+external+'</div>'}
+
+function leaderboard(){const r=[['01','Aisha Morgan','42','86h','31d'],['02','Sarah Chen','38','74h','14d'],['03','Jordan Lee','35','69h','21d'],['04','Tom Wilson','31','62h','9d'],['05','Maya Patel','29','58h','18d'],['06','Owen Smith','27','51h','7d']];return head('COMMUNITY','Learning leaderboard')+`<div class="leader card"><div class="leaderhead"><span>RANK</span><span>EMPLOYEE</span><span>COURSES</span><span>HOURS</span><span>STREAK</span></div>${r.map(x=>`<div class="leaderrow ${x[1]==='Sarah Chen'?'you':''}"><b>${x[0]}</b><div class="person"><div class="tiny">${x[1].split(' ').map(a=>a[0]).join('')}</div><span>${x[1]}${x[1]==='Sarah Chen'?' <em>You</em>':''}</span></div><span>${x[2]}</span><span>${x[3]}</span><span>${x[4]}</span></div>`).join('')}</div><p style="color:var(--muted);text-align:center;margin-top:18px">Learning is not a race. This view celebrates momentum, not comparison.</p>`}
+const notificationData=[{icon:'♧',text:'Your Leadership Essentials course is due tomorrow.',time:'Today · 2h ago'},{icon:'◇',text:'You’ve earned a new certificate.',time:'Today · 4h ago'},{icon:'♙',text:'Sarah completed the same learning path you are taking.',time:'Yesterday'},{icon:'♨',text:'You’ve maintained your 14-day learning streak.',time:'Yesterday'}];
+function notifications(){const visible=notificationData.map((x,i)=>({...x,i})).filter(x=>!S.dismissedNotes.includes(x.i));return head('PERSONAL','Notifications',`<button class="btn" data-clear-notes>Mark all as read</button>`)+(visible.length?`<div class="notifications card">${visible.map(x=>`<button class="notification" data-note="${x.i}"><div class="noticeIcon">${x.icon}</div><div><b>${x.text}</b><span>${x.time}</span></div></button>`).join('')}</div>`:`<div class="empty"><h3>You’re all caught up.</h3><p>Nothing needs your attention right now.</p></div>`)}
+function profile(){return head('PERSONAL','Sarah Chen','<button class="btn" data-toast="Profile editing is ready in the Northstar workspace.">Edit profile</button>')+`<div class="profile"><div class="profilecard card"><div class="profilepic">SC</div><h2>Sarah Chen</h2><p>Senior Product Manager · Digital Experience</p><span>Northstar · London</span></div><div class="stats"><div class="stat"><span>Learning hours</span><b>124.5</b></div><div class="stat"><span>Courses completed</span><b>18</b></div><div class="stat"><span>Skills developing</span><b>6</b></div><div class="stat"><span>Certificates</span><b>3</b></div></div><div class="history card"><div class="eyebrow">LEARNING HISTORY</div><h3>Recent activity</h3>${['Leadership Essentials · Completed','Strategic Thinking · 68%','Data Literacy · 52%','Communication & Influence · Completed'].map(x=>`<div class="historyrow"><span>✓</span><b>${x}</b><small>June</small></div>`).join('')}</div></div>`}
+function calendar(){return head('PERSONAL','Learning calendar','<button class="primary" data-toast="Learning session scheduled.">+ Schedule learning</button>')+`<div class="calendar card"><div class="calhead"><button class="btn" data-toast="Previous month">‹</button><h3>August 2026</h3><button class="btn" data-toast="Next month">›</button></div><div class="calgrid">${['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(x=>`<b>${x}</b>`).join('')}${Array.from({length:42},(_,i)=>{const d=i-5;return `<div class="${d===16?'today ':''}${d>0&&d<=31?'':'muted'}">${d>0&&d<=31?d:''}${[4,11,18,25].includes(d)?'<i></i>':''}</div>`}).join('')}</div></div>`}
+function downloadCertificate(){const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100"><rect width="1600" height="1100" fill="#faf8f0"/><rect x="55" y="55" width="1490" height="990" fill="none" stroke="#1e293b" stroke-width="3"/><text x="800" y="180" text-anchor="middle" font-family="Arial" font-size="26" letter-spacing="8" fill="#1e293b">LEARNHUB</text><text x="800" y="275" text-anchor="middle" font-family="Georgia" font-size="64" fill="#171717">CERTIFICATE OF COMPLETION</text><text x="800" y="390" text-anchor="middle" font-family="Arial" font-size="24" fill="#737373">Presented to</text><text x="800" y="490" text-anchor="middle" font-family="Georgia" font-size="72" fill="#171717">Sarah Chen</text><circle cx="800" cy="650" r="58" fill="none" stroke="#a7b8a1" stroke-width="5"/><text x="800" y="670" text-anchor="middle" font-family="Georgia" font-size="42" fill="#1e293b">N</text><text x="800" y="785" text-anchor="middle" font-family="Arial" font-size="25" fill="#737373">Leadership Essentials · Score 94%</text><text x="800" y="840" text-anchor="middle" font-family="Arial" font-size="20" fill="#737373">18 June 2026 · Certificate ID LH-LE-260618</text></svg>`;const blob=new Blob([svg],{type:'image/svg+xml'});const a=document.createElement('a');const url=URL.createObjectURL(blob);a.href=url;a.download='LearnHub-Leadership-Essentials-Sarah-Chen.svg';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function sanitizePdfText(s){
+  return String(s).normalize('NFC')
+    .replace(/[\u2018\u2019]/g,"'")
+    .replace(/[\u201C\u201D]/g,'"')
+    .replace(/[\u2013\u2014]/g,"-")
+    .replace(/\u2026/g,"...")
+    .split('').map(ch=>{
+      const cp=ch.codePointAt(0);
+      if((cp>=0x20&&cp<=0x7E)||(cp>=0xA0&&cp<=0xFF)) return ch;
+      return '';
+    }).join('');
+}
+function escPdfString(s){return sanitizePdfText(s).replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)")}
+
+const WIDTH_FACTOR={
+  Helvetica:0.545,'Helvetica-Bold':0.575,'Helvetica-Oblique':0.545,
+  'Times-Roman':0.48,'Times-Bold':0.5,'Times-Italic':0.46,'Times-BoldItalic':0.5
+};
+function textWidth(str,font,size){return sanitizePdfText(str).length*size*(WIDTH_FACTOR[font]||0.5)}
+
+const FONT_TAG={
+  Helvetica:'F1','Helvetica-Bold':'F2','Helvetica-Oblique':'F3',
+  'Times-Bold':'F4','Times-BoldItalic':'F5'
+};
+function pdfText(font,size,x,y,str,color,opts){
+  opts=opts||{};
+  const [r,g,b]=color;
+  let s='BT\n/'+FONT_TAG[font]+' '+size+' Tf\n'+r+' '+g+' '+b+' rg\n';
+  s+=(opts.charSpacing||0)+' Tc\n';
+  s+=x.toFixed(2)+' '+y.toFixed(2)+' Td\n('+escPdfString(str)+') Tj\nET\n';
+  return s;
+}
+function pdfTextCentered(font,size,cx,y,str,color,opts){
+  opts=opts||{};
+  const clean=sanitizePdfText(str);
+  const baseW=clean.length*size*(WIDTH_FACTOR[font]||0.5);
+  const spacingW=(opts.charSpacing||0)*clean.length;
+  const x=cx-(baseW+spacingW)/2;
+  return pdfText(font,size,x,y,str,color,opts);
+}
+function fillRect(x,y,w,h,color){const [r,g,b]=color;return r+' '+g+' '+b+' rg\n'+x+' '+y+' '+w+' '+h+' re\nf\n'}
+function strokeRect(x,y,w,h,color,lw){const [r,g,b]=color;return lw+' w\n'+r+' '+g+' '+b+' RG\n'+x+' '+y+' '+w+' '+h+' re\nS\n'}
+function line(x1,y1,x2,y2,color,lw){const [r,g,b]=color;return lw+' w\n'+r+' '+g+' '+b+' RG\n'+x1+' '+y1+' m\n'+x2+' '+y2+' l\nS\n'}
+function circlePath(cx,cy,r){
+  const k=0.5523*r;
+  return (cx+r).toFixed(2)+' '+cy.toFixed(2)+' m\n'+
+    (cx+r).toFixed(2)+' '+(cy+k).toFixed(2)+' '+(cx+k).toFixed(2)+' '+(cy+r).toFixed(2)+' '+cx.toFixed(2)+' '+(cy+r).toFixed(2)+' c\n'+
+    (cx-k).toFixed(2)+' '+(cy+r).toFixed(2)+' '+(cx-r).toFixed(2)+' '+(cy+k).toFixed(2)+' '+(cx-r).toFixed(2)+' '+cy.toFixed(2)+' c\n'+
+    (cx-r).toFixed(2)+' '+(cy-k).toFixed(2)+' '+(cx-k).toFixed(2)+' '+(cy-r).toFixed(2)+' '+cx.toFixed(2)+' '+(cy-r).toFixed(2)+' c\n'+
+    (cx+k).toFixed(2)+' '+(cy-r).toFixed(2)+' '+(cx+r).toFixed(2)+' '+(cy-k).toFixed(2)+' '+(cx+r).toFixed(2)+' '+cy.toFixed(2)+' c\n';
+}
+function fillCircle(cx,cy,r,color){const [rr,g,b]=color;return rr+' '+g+' '+b+' rg\n'+circlePath(cx,cy,r)+'f\n'}
+function strokeCircle(cx,cy,r,color,lw){const [rr,g,b]=color;return lw+' w\n'+rr+' '+g+' '+b+' RG\n'+circlePath(cx,cy,r)+'S\n'}
+function fillDiamond(cx,cy,r,color){const [rr,g,b]=color;return rr+' '+g+' '+b+' rg\n'+cx+' '+(cy+r)+' m\n'+(cx+r)+' '+cy+' l\n'+cx+' '+(cy-r)+' l\n'+(cx-r)+' '+cy+' l\nh\nf\n'}
+
+const INK=[0.118,0.161,0.220];
+const NEARBLACK=[0.09,0.09,0.09];
+const MUTED=[0.451,0.451,0.451];
+const SAGE=[0.612,0.686,0.588];
+const CREAM=[0.976,0.969,0.937];
+const WHITE=[1,1,1];
+
+function fitFontSize(text,font,maxWidth,startSize,minSize){
+  let size=startSize;
+  while(size>minSize && textWidth(text,font,size)>maxWidth){size-=1}
+  return size;
+}
+
+function buildCertificateContent(name,title,score,date,id,issuer){
+  const cx=421, PW=842, PH=595;
+  const isExternal=String(score).toLowerCase()==='external';
+  let c='';
+  c+=fillRect(0,0,PW,PH,CREAM);
+  c+=strokeRect(26,26,PW-52,PH-52,INK,2.2);
+  c+=strokeRect(34,34,PW-68,PH-68,SAGE,1);
+  c+=pdfTextCentered('Helvetica-Bold',15,cx,540,'LEARNHUB',INK,{charSpacing:4});
+  c+=line(cx-45,524,cx+45,524,SAGE,1);
+  c+=pdfTextCentered('Times-Bold',30,cx,483,isExternal?'CERTIFICATE OF ACHIEVEMENT':'CERTIFICATE OF COMPLETION',NEARBLACK);
+  c+=pdfTextCentered('Helvetica-Oblique',13,cx,442,'This certifies that',MUTED);
+  const nameSize=fitFontSize(name,'Times-BoldItalic',680,34,20);
+  c+=pdfTextCentered('Times-BoldItalic',nameSize,cx,392,name,INK);
+  const nameW=Math.max(220,textWidth(name,'Times-BoldItalic',nameSize)+40);
+  c+=line(cx-nameW/2,378,cx+nameW/2,378,SAGE,1);
+  c+=pdfTextCentered('Helvetica-Oblique',11.5,cx,355,'has successfully completed the course',MUTED);
+  const titleSize=fitFontSize(title,'Times-Bold',700,17,11);
+  c+=pdfTextCentered('Times-Bold',titleSize,cx,328,title,NEARBLACK);
+  c+=pdfTextCentered('Helvetica',11,cx,303,isExternal?('Completed '+date):('Score '+score+'  \u00b7  Completed '+date),MUTED);
+  c+=pdfTextCentered('Helvetica',9,cx,284,'Certificate ID  '+id,MUTED);
+  c+=line(cx-140,222,cx-16,222,SAGE,0.75);
+  c+=fillDiamond(cx,222,5,SAGE);
+  c+=line(cx+16,222,cx+140,222,SAGE,0.75);
+  c+=pdfTextCentered('Helvetica-Oblique',10.5,cx,195,'Awarded in recognition of commitment to continuous learning.',MUTED);
+  c+=line(48,116,794,116,SAGE,1);
+  c+=strokeCircle(cx,78,32,INK,2.2);
+  c+=fillCircle(cx,78,27,SAGE);
+  c+=pdfTextCentered('Times-Bold',26,cx,68,'N',WHITE);
+  c+=line(140,95,326,95,INK,1);
+  c+=pdfTextCentered('Helvetica',9,233,82,'Program Director',MUTED);
+  c+=line(516,95,702,95,INK,1);
+  c+=pdfTextCentered('Helvetica',9,609,82,issuer||'Northstar Learning',MUTED);
+  return c;
+}
+
+function strToBytes(str){
+  const buf=new Uint8Array(str.length);
+  for(let i=0;i<str.length;i++){buf[i]=str.charCodeAt(i)&0xFF}
+  return buf;
+}
+
+function downloadCertificatePDF(title,score,date,id,issuer){
+  const body=buildCertificateContent('Sarah Chen',title,score,date,id,issuer);
+  const objs=[
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 842 595] /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R /F4 8 0 R /F5 9 0 R >> >> /Contents 4 0 R >>',
+    '<< /Length '+body.length+' >>\nstream\n'+body+'endstream',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold /Encoding /WinAnsiEncoding >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Times-BoldItalic /Encoding /WinAnsiEncoding >>'
+  ];
+  let pdf='%PDF-1.4\n';
+  const offsets=[0];
+  objs.forEach((o,i)=>{offsets.push(pdf.length);pdf+=(i+1)+' 0 obj\n'+o+'\nendobj\n'});
+  const xrefStart=pdf.length;
+  let xref='xref\n0 '+(objs.length+1)+'\n0000000000 65535 f \n';
+  for(let i=1;i<=objs.length;i++){xref+=String(offsets[i]).padStart(10,'0')+' 00000 n \n'}
+  pdf+=xref+'trailer\n<< /Size '+(objs.length+1)+' /Root 1 0 R >>\nstartxref\n'+xrefStart+'\n%%EOF';
+  return strToBytes(pdf);
+}
+
+function downloadCertificateFile(title,score,date,id,issuer){
+  const bytes=downloadCertificatePDF(title,score,date,id,issuer);
+  const blob=new Blob([bytes],{type:"application/pdf"}),url=URL.createObjectURL(blob),link=document.createElement("a");
+  link.href=url;link.download="LearnHub-"+sanitizePdfText(title).replace(/[^a-z0-9]+/gi,"-")+"-Certificate.pdf";
+  document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)
+}
+function addCertificate(){const title=document.getElementById("newCertTitle")?.value.trim(),issuer=document.getElementById("newCertIssuer")?.value.trim(),date=document.getElementById("newCertDate")?.value;if(!title||!issuer||!date){toast("Add a title, issuer and completion date.");return}S.userCertificates.unshift({title,issuer,date,id:"LH-EXT-"+Date.now().toString().slice(-6)});S.modal=null;go("Certificates")}
+function modal(){if(S.modal==="add-certificate")return `<div class="overlay" data-overlay><div class="modal"><button class="close" data-close aria-label="Close">×</button><div class="eyebrow">CREDENTIALS</div><h2>Add a certificate.</h2><p style="color:var(--muted)">Add an external qualification to your LearnHub profile.</p><label>Certificate title<input id="newCertTitle" class="search full" placeholder="e.g. Certified ScrumMaster"></label><label>Issuer<input id="newCertIssuer" class="search full" placeholder="e.g. Northstar Academy"></label><label>Completion date<input id="newCertDate" type="date" class="search full"></label><button class="primary full" data-add-certificate>Save certificate</button></div></div>`;const p=String(S.modal||"").split(":");if(p[0]==="certificate")return `<div class="overlay" data-overlay><div class="modal"><button class="close" data-close aria-label="Close">×</button><div class="certpaper"><div class="certbrand">LEARNHUB</div><div class="certsmall">CERTIFICATE OF COMPLETION</div><h3>${p[1]}</h3><p>Presented to</p><h2>Sarah Chen</h2><div class="seal">N</div><p>Northstar Learning</p><small>${p[3]} · Score ${p[2]} · ${p[4]}</small></div><button class="primary full" data-download-cert="${p[1]}|${p[2]}|${p[3]}|${p[4]}">↓ Download PDF certificate</button></div></div>`;if(S.modal==="quiz")return `<div class="overlay"><div class="modal"><button class="close" data-close>×</button><div class="eyebrow">ASSESSMENT COMPLETE</div><h2>Another skill added to your toolkit.</h2><button class="primary full" data-page="Achievements">Continue</button></div></div>`;return ""}
+
+
+function assessments(){
+ return head('ASSESSMENTS','Assessments','<span class="tag">2 available</span>')+
+ '<div class="panelgrid"><section class="card listcard"><div class="eyebrow">READY TO TAKE</div><h3>Strategic Thinking · Knowledge Check</h3><p style="color:var(--muted)">3 questions · 5 minutes · Passing score 70%</p>'+bar(0)+'<button class="primary" data-action="start-quiz">Start assessment →</button></section>'+
+ '<section class="card listcard"><div class="eyebrow">COMPLETED</div><h3>Leadership Essentials</h3><p style="color:var(--muted)">Score 94% · Passed · 18 June 2026</p><span class="tag">Passed</span></section></div>'
+}
+function myLearning(){
+ const active=courses.filter(c=>c.progress>0&&c.progress<100), done=courses.filter(c=>c.progress===100);
+ return head('YOUR LIBRARY','My learning','<button class="btn" data-page="Explore Courses">Explore catalogue ↗</button>')+
+ '<p class="lede">Pick up where you left off.</p><div class="grid">'+active.map(courseCard).join('')+'</div>'+
+ '<div class="section"><div><div class="eyebrow">COMPLETED</div><h2>Recently finished</h2></div></div><div class="grid">'+done.map(courseCard).join('')+'</div>'
+}
+function goals(){
+ return head('DEVELOPMENT','Goals','<button class="primary" data-toast="New goal created.">+ New goal</button>')+
+ '<div class="panelgrid"><section class="card listcard"><div class="eyebrow">2026 DEVELOPMENT GOAL</div><h3>Build stronger strategic communication</h3><p style="color:var(--muted)">Complete Communication & Influence and Executive Presence by September.</p>'+bar(63)+'<div class="details"><span>63% complete</span><span>2 of 3 milestones</span></div></section>'+
+ '<section class="card listcard"><div class="eyebrow">NEXT MILESTONE</div><h3>Finish Communication & Influence</h3><p style="color:var(--muted)">2h 45m remaining.</p><button class="btn" data-course="4">Continue learning →</button></section>'+
+ '<section class="card listcard wide"><div class="eyebrow">GOAL HISTORY</div><div class="listitem"><b>Complete Future Leader path</b><span>72%</span></div><div class="listitem"><b>Reach 100 learning hours</b><span>124.5h · Achieved</span></div></section></div>'
+}
+function groups(){
+ return head('COMMUNITY','Learning groups','<button class="btn" data-toast="Group discovery opened.">Find a group</button>')+
+ '<div class="grid"><article class="card listcard"><div class="eyebrow">8 MEMBERS</div><h3>Future Leaders</h3><p style="color:var(--muted)">A quiet space for people building their leadership toolkit.</p><button class="btn" data-toast="Joined Future Leaders.">Join group</button></article>'+
+ '<article class="card listcard"><div class="eyebrow">14 MEMBERS</div><h3>AI at Work</h3><p style="color:var(--muted)">Share practical ideas for using AI thoughtfully at Northstar.</p><button class="btn" data-toast="Joined AI at Work.">Join group</button></article>'+
+ '<article class="card listcard"><div class="eyebrow">11 MEMBERS</div><h3>Project Practitioners</h3><p style="color:var(--muted)">Patterns, templates and lessons from active projects.</p><button class="btn" data-toast="Joined Project Practitioners.">Join group</button></article></div>'
+}
+const settingLabels={reduceMotion:'Reduce motion',weeklyReminder:'Weekly learning reminder',courseRecommendations:'Course recommendations'};
+function settingToggle(key,title,desc){return `<div class="listitem"><div><b>${title}</b><p style="margin:4px 0;color:var(--muted)">${desc}</p></div><button class="toggle ${S.settings[key]?'on':''}" data-toggle-setting="${key}"><i></i></button></div>`}
+function settings(){
+ return head('PERSONAL','Settings')+
+ '<div class="panelgrid"><section class="card listcard"><div class="eyebrow">APPEARANCE</div>'+
+ '<div class="listitem"><div><b>Dark mode</b><p style="margin:4px 0;color:var(--muted)">A deeper interface for low-light work.</p></div><button class="toggle '+(S.dark?'on':'')+'" data-dark><i></i></button></div>'+
+ settingToggle('reduceMotion','Reduce motion','Prefer calmer transitions.')+'</section>'+
+ '<section class="card listcard"><div class="eyebrow">LEARNING PREFERENCES</div>'+
+ settingToggle('weeklyReminder','Weekly learning reminder','Tuesday at 9:00.')+
+ settingToggle('courseRecommendations','Course recommendations','Personalised to your development.')+'</section>'+
+ '<section class="card listcard wide"><div class="eyebrow">ACCOUNT</div><div class="listitem"><b>Sarah Chen · Senior Product Manager</b><span>Northstar</span></div><div class="listitem"><b>Notification email</b><span>Enabled</span></div></section></div>'
+}
+
+const discussionThreads=[
+ {id:1,title:'How are you applying Strategic Thinking in your role?',course:'Strategic Thinking',author:'Aisha Morgan',time:'2h ago',body:'Curious how others are turning the strategic-question framework into something they actually use in weekly planning. Any examples?',comments:[
+  {author:'Jordan Lee',time:'1h ago',body:'I now open every planning session by writing the decision as one sentence, no solution allowed. Slows the room down in a good way.'},
+  {author:'Maya Patel',time:'55m ago',body:'Same here — we added "what outcome are we creating?" as a standing question in our roadmap reviews.'},
+  {author:'Owen Smith',time:'40m ago',body:'Helpful thread. I struggle most with the "what constraint matters most" part when priorities keep shifting.'},
+  {author:'Tom Wilson',time:'20m ago',body:'@Owen Smith try naming the constraint before the meeting starts — even a rough guess keeps the discussion anchored.'}
+ ]},
+ {id:2,title:'Best resources for Data Literacy beyond the course?',course:'Data Literacy',author:'Tom Wilson',time:'1d ago',body:'Loved the course, looking for a next step to keep building comfort with data.',comments:[
+  {author:'Sarah Chen',time:'20h ago',body:'The internal "Data Literacy: Applied" path in Learning Paths is a solid next step.'},
+  {author:'Aisha Morgan',time:'14h ago',body:'Seconding that. I also found working through real dashboards from our team more useful than more theory.'}
+ ]},
+ {id:3,title:'Tips for the Leadership Essentials final assessment',course:'Leadership Essentials',author:'Jordan Lee',time:'3d ago',body:'What helped you prepare? The scenario questions felt tricky.',comments:[
+  {author:'Owen Smith',time:'2d ago',body:'Re-read the feedback module before attempting it — most of the scenario questions map back to that section.'},
+  {author:'Maya Patel',time:'2d ago',body:'Agreed. I also talked through two scenarios out loud with a colleague, which made the reasoning click.'},
+  {author:'Sarah Chen',time:'1d ago',body:'Passed mine at 94% doing exactly this. The scenarios reward picking the option that builds trust, not the fastest fix.'}
+ ]}
+];
+function initials(n){return n.split(' ').map(a=>a[0]).join('')}
+function addReply(text){const t=discussionThreads.find(x=>x.id===+S.thread);if(t){t.comments.push({author:'Sarah Chen',time:'Just now',body:text});toast('Reply posted.');render()}}
+function discussions(){
+ if(S.thread){
+  const t=discussionThreads.find(x=>x.id===+S.thread)||discussionThreads[0];
+  return head('DISCUSSIONS',t.title,'<button class="btn" data-thread-back>← Back to discussions</button>')+
+   `<div class="card listcard" style="padding:26px"><div class="eyebrow">${t.course} · ${t.comments.length} ${t.comments.length===1?'comment':'comments'}</div><p style="color:var(--muted);line-height:1.7">${t.body}</p><div class="listitem"><div class="tiny">${initials(t.author)}</div><div><b>${t.author}</b><span style="color:var(--muted);display:block;font-size:11px">${t.time}</span></div></div></div>`+
+   `<div class="card listcard" style="padding:26px;margin-top:16px"><div class="eyebrow">${t.comments.length} ${t.comments.length===1?'COMMENT':'COMMENTS'}</div>${t.comments.map(c=>`<div class="listitem" style="align-items:start"><div class="tiny" style="margin-top:2px">${initials(c.author)}</div><div><b>${c.author}</b><span style="color:var(--muted);display:block;font-size:11px;margin-bottom:6px">${c.time}</span><p style="margin:0;color:var(--text);line-height:1.6">${c.body}</p></div></div>`).join('')}</div>`+
+   `<div class="card listcard" style="padding:26px;margin-top:16px"><div class="eyebrow">ADD A REPLY</div><textarea id="replyBox" class="search full" style="min-height:90px;padding:12px"></textarea><button class="primary" style="margin-top:12px" data-reply>Post reply</button></div>`;
+ }
+ return head('COMMUNITY','Discussions','<button class="btn" data-toast="New thread started.">+ New thread</button>')+
+  `<div class="notifications card">${discussionThreads.map(t=>`<button class="notification" data-thread="${t.id}"><div class="noticeIcon">▱</div><div><b>${t.title}</b><span>${t.course} · ${t.comments.length} comments · ${t.author} · ${t.time}</span></div></button>`).join('')}</div>`;
+}
+function content(){switch(S.page){case'Home':return dashboard();case'Explore Courses':return explore();case'Course':return coursePage();case'Lesson':return lesson();case'Quiz':return quiz();case'Skills':return skills();case'Learning Paths':return paths();case'Achievements':return achievements();case'Certificates':return certificates();case'Leaderboard':return leaderboard();case'Notifications':return notifications();case'Profile':return profile();case'Calendar':return calendar();case'Assessments':return assessments();case'My Learning':return myLearning();case'Goals':return goals();case'Learning Groups':return groups();case'Discussions':return discussions();case'Settings':return settings();default:return dashboard()}}
+function shell(){return `<aside class="side ${S.sidebar?'show':''}"><div class="brand"><div class="mark">N</div><div><b>LearnHub</b><small>NORTHSTAR</small></div></div><div class="workspace">Northstar Learning</div><nav>${nav.map(g=>`<div class="group"><div class="label">${g[0]}</div>${g[1].map(n=>`<button class="nav ${S.page===n[0]?'active':''}" data-page="${n[0]}">${icon(n[1])}<span>${n[0]}</span>${n[0]==='Notifications'&&(notificationData.length-S.dismissedNotes.length)?`<b class="count">${notificationData.length-S.dismissedNotes.length}</b>`:''}</button>`).join('')}</div>`).join('')}</nav><button class="collapse" data-toggle-side>☰ Collapse</button></aside><main class="main"><header class="top"><button class="iconbtn mobile" data-toggle-side>☰</button><div class="search">⌕<input id="globalSearch" placeholder="Search courses, skills, people…" value="${S.search.replace(/"/g,'&quot;')}"></div><div class="actions"><button class="iconbtn" data-dark>${S.dark?'☼':'◐'}</button><button class="iconbtn" data-page="Notifications">♧</button><div class="avatar">SC</div></div></header><div class="content">${content()}</div></main>${S.modal?modal():''}`}
+function render(){document.documentElement.dataset.theme=S.dark?'dark':'light';document.documentElement.classList.toggle('reduce-motion',S.settings.reduceMotion);document.getElementById('app').innerHTML=shell()}
+document.addEventListener('click',e=>{
+ const t=e.target.closest('[data-page],[data-course],[data-action],[data-modal],[data-close],[data-download-cert],[data-add-certificate],[data-thread],[data-thread-back],[data-reply],[data-toast],[data-dark],[data-toggle-side],[data-overlay],[data-note],[data-clear-notes],[data-lesson],[data-lesson-prev],[data-complete-lesson],[data-answer],[data-quiz-prev],[data-quiz-next],[data-toggle-setting]');
+ if(!t)return;
+ if(t.dataset.overlay!==undefined&&e.target===t){S.modal=null;render();return}
+ if(t.dataset.close!==undefined){S.modal=null;render();return}
+ if(t.dataset.downloadCert){const q=t.dataset.downloadCert.split("|");downloadCertificateFile(q[0],q[1],q[2],q[3],q[4]);return}
+ if(t.dataset.addCertificate!==undefined){addCertificate();return}
+ if(t.dataset.thread){S.thread=t.dataset.thread;render();return}
+ if(t.dataset.threadBack!==undefined){S.thread=null;render();return}
+ if(t.dataset.reply!==undefined){const box=document.getElementById("replyBox");if(box&&box.value.trim()){addReply(box.value.trim());box.value=""}else{toast("Write a reply first.")}return}
+ if(t.dataset.page){go(t.dataset.page);return}
+ if(t.dataset.course){openCourse(+t.dataset.course);return}
+ if(t.dataset.action==="start-quiz"){S.quiz=0;S.answers=[];go("Quiz");return}
+ if(t.dataset.modal){S.modal=t.dataset.modal;render();return}
+ if(t.dataset.toast){toast(t.dataset.toast);return}
+ if(t.dataset.note){const idx=+t.dataset.note;if(!S.dismissedNotes.includes(idx)){S.dismissedNotes.push(idx)}render();return}
+ if(t.dataset.clearNotes!==undefined){S.dismissedNotes=notificationData.map((_,i)=>i);render();return}
+ if(t.dataset.dark!==undefined){
+  S.dark=!S.dark;
+  document.documentElement.dataset.theme=S.dark?'dark':'light';
+  document.querySelectorAll('[data-dark]').forEach(el=>{
+   if(el.classList.contains('toggle')){el.classList.toggle('on',S.dark)}
+   else{el.textContent=S.dark?'☼':'◐'}
+  });
+  return;
+ }
+ if(t.dataset.toggleSide!==undefined){S.sidebar=!S.sidebar;render();return}
+ if(t.dataset.lesson!==undefined){S.lesson=+t.dataset.lesson;render();return}
+ if(t.dataset.lessonPrev!==undefined){S.lesson=Math.max(0,S.lesson-1);render();return}
+ if(t.dataset.completeLesson!==undefined){const total=6;if(S.lesson<total-1){S.lesson++;toast('Lesson marked as complete.');render()}else{toast('Course completed — nice work!');go('Quiz')}return}
+ if(t.dataset.answer!==undefined){S.answers[S.quiz]=+t.dataset.answer;render();return}
+ if(t.dataset.quizPrev!==undefined){S.quiz=Math.max(0,S.quiz-1);render();return}
+ if(t.dataset.quizNext!==undefined){nextQuiz();return}
+ if(t.dataset.toggleSetting){
+  const k=t.dataset.toggleSetting;
+  S.settings[k]=!S.settings[k];
+  t.classList.toggle('on',S.settings[k]);
+  if(k==='reduceMotion'){document.documentElement.classList.toggle('reduce-motion',S.settings.reduceMotion)}
+  toast(settingLabels[k]+' '+(S.settings[k]?'enabled.':'disabled.'));
+  return;
+ }
+});
+document.addEventListener('input',e=>{if(e.target.id==='globalSearch'){S.search=e.target.value;if(S.page==='Explore Courses')render()}if(e.target.id==='catalogSearch'){S.search=e.target.value;render()}});
+render();
+</script>
+</body>
+</html>
